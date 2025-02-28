@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         setTimeout(() => {
-            fetch("http://localhost:8080/roll")
+            fetch("/roll")
                 .then(response => response.json())
                 .then(data => {
                     diceImage.classList.remove("rolling"); 
