@@ -1,0 +1,23 @@
+{
+  "name": "rolldice",
+  "version": "1.0.0",
+  "main": "roll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaryamAljanahi/RollDice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaryamAljanahi/RollDice/issues"
+  },
+  "homepage": "https://github.com/MaryamAljanahi/RollDice#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
