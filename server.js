@@ -3,8 +3,13 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
+
+app.get("/wakeup", (req, res) => {
+    res.json({ status: "Server is awake!" });
+});
+
 app.use(cors({
-    origin: "*",
+    origin: "https://nonexistent-subdomain.rolldice-g3h0c0drf4dfafeg.uaenorth-01.azurewebsites.net", // Restrict to a non-existent subdomain
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
