@@ -1,3 +1,9 @@
+function rollDice() {
+    let diceValue = Math.floor(Math.random() * 6) + 1;
+    document.getElementById("diceImage").src = "dice" + diceValue + ".png";
+    document.getElementById("result").textContent = "You rolled a " + diceValue + "!";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const rollButton = document.createElement("button");
     rollButton.textContent = "Roll";
