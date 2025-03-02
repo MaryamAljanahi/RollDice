@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= "style.css">
-    <title>Dice Roller</title>
-    
+    <title>API Tester</title>
 </head>
 <body>
+<h1>API Tester</h1>
+<button id="testButton">Test /roll API</button>
+<p id="result"></p>
 
-    <h1>Roll the Dice</h1>
-    <img id="diceImage" src="dice1.png" alt="Dice">
-    <br>
-    <p id="result">Click "Roll" to start!</p>
-
-    <script>
-        function rollDice() {
-            let diceValue = Math.floor(Math.random() * 6) + 1; 
-            document.getElementById("diceImage").src = "dice" + diceValue + ".png"; 
-            document.getElementById("result").textContent = "You rolled a " + diceValue + "!";
-        }
-    </script>
-    <script src="script.js"></script>
+<script>
+    document.getElementById("testButton").addEventListener("click", () => {
+        fetch("/roll")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = `Dice: ${data.dice}, Message: ${data.message}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").textContent = "API call failed!";
+            });
+    });
+</script>
 </body>
 </html>
