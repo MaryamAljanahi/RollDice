@@ -9,7 +9,7 @@ app.get("/wakeup", (req, res) => {
 });
 
 app.use(cors({
-    origin: "https://nonexistent-subdomain.rolldice-g3h0c0drf4dfafeg.uaenorth-01.azurewebsites.net", // Restrict to a non-existent subdomain
+    origin: "https://rolldice-g3h0c0drf4dfafeg.uaenorth-01.azurewebsites.net", // Allow our actual domain
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
