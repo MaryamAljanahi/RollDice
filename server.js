@@ -11,7 +11,7 @@ app.use(cors({
 // static files (HTML, CSS, images)
 app.use(express.static(path.join(__dirname)));
 
-// API route for rolling the dice
+// API route for rolling the dicee
 app.get("/roll", (req, res) => {
     const diceValue = Math.floor(Math.random() * 6) + 1;
     res.json({ dice: diceValue, message: `You rolled a ${diceValue}!` });
