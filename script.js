@@ -1,33 +1,31 @@
-function rollDice() {
-    let diceValue = Math.floor(Math.random() * 6) + 1;
-    document.getElementById("diceImage").src = "dice" + diceValue + ".png";
-    document.getElementById("result").textContent = "You rolled a " + diceValue + "!";
-}
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const rollButton = document.createElement("button");
-    rollButton.textContent = "Roll";
-    rollButton.id = "rollButton";
-    document.body.appendChild(rollButton);
+const app = express();
 
-    rollButton.addEventListener("click", () => {
-        let diceImage = document.getElementById("diceImage");
-        let resultText = document.getElementById("result");
+// CORS configuration
+app.use(cors({
+    origin: "https://rollingdicestorageacc.z1.web.core.windows.net", // Your Azure Static Website URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
+// Serve static files (HTML, CSS, images)
+app.use(express.static(path.join(__dirname, "public")));
 
-        diceImage.classList.add("rolling");
-        resultText.textContent = "Rolling... 🎲";
+// API route for rolling the dice
+app.get("/roll", (req, res) => {
+    const diceValue = Math.floor(Math.random() * 6) + 1;
+    res.json({ dice: diceValue, message: `You rolled a ${diceValue}!` });
+});
 
+// Default route for index.html
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
-        setTimeout(() => {
-            fetch("/roll")
-                .then(response => response.json())
-                .then(data => {
-                    diceImage.classList.remove("rolling");
-                    diceImage.src = `dice${data.dice}.png`;
-                    resultText.textContent = data.message;
-                })
-                .catch(error => console.error("Error:", error));
-        }, 1000);
-    });
+// Start the server with a dynamic port for Azure
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
