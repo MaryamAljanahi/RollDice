@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Dice Roller</title>
+</head>
+<body>
+<h1>Roll the Dice</h1>
+<img id="diceImage" src="dice1.png" alt="Dice">
+<br>
+<p id="result">Click "Roll" to start!</p>
+
+<script>
+  function rollDice() {
+    const diceImage = document.getElementById("diceImage");
+    const resultText = document.getElementById("result");
+
+    // Show rolling animation
+    diceImage.classList.add("rolling");
+    resultText.textContent = "Rolling... 🎲";
+
+    // Call the RESTful API
+    fetch("/roll")
+            .then(response => response.json())
+            .then(data => {
+              // Stop rolling animation and update dice image
+              diceImage.classList.remove("rolling");
+              diceImage.src = `dice${data.dice}.png`;
+              resultText.textContent = data.message;
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              resultText.textContent = "Failed to roll the dice. Please try again.";
+            });
+  }
+
+  // Add event listener to the "Roll" button
+  document.addEventListener("DOMContentLoaded", () => {
+    const rollButton = document.createElement("button");
+    rollButton.textContent = "Roll";
+    rollButton.id = "rollButton";
+    document.body.appendChild(rollButton);
+
+    rollButton.addEventListener("click", rollDice);
+  });
+</script>
+</body>
+</html>
