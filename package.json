@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "roll.js",
   "scripts": {
-    "run": "node server.js"
+    "start": "node server.js", // This is the script Azure will use to start your app
+    "build": "echo 'No build required for this project'", // Dummy build script
+    "run": "node server.js" // Optional: You can keep this for local testing
   },
   "repository": {
     "type": "git",
